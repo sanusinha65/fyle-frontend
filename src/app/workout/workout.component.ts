@@ -73,7 +73,7 @@ export class WorkoutComponent implements OnInit {
     }
   }
   // pagination functions  -- ends here 
-  
+
   // for adding workout in the localstorage
   addWorkout() {
     const userName = this.workOutUserName.trim();

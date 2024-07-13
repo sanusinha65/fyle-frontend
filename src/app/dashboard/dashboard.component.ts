@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Title} from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 
 interface Workout {
   type: string;
@@ -15,10 +15,10 @@ interface User {
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  value: string = ''; 
+  value: string = '';
   title = 'fyle-assignment';
   workoutUsers = 0;
   workoutTime = 0;
@@ -52,13 +52,22 @@ export class DashboardComponent implements OnInit {
   ];
 
   filteredUserData: User[] = [];
+  filteredUserDataForDisplay: User[] = [];
   searchText: string = '';
   uniqueWorkoutTypes: string[] = [];
-  selectedName: string ='all';
+  selectedName: string = 'all';
+  currentPage: number = 1;
+  usersPerPage: number = 5;
+  perPageOptions: number[] = [5, 10, 25, 50, 100];
 
   constructor(private titleService: Title) { }
+
   ngOnInit(): void {
     this.titleService.setTitle('Dashboard | Fyle');
+    if (typeof localStorage === 'undefined') {
+      console.error('localStorage is not available.');
+      return;
+    }
     const localStorageData = localStorage.getItem('userData');
     if (localStorageData) {
       const storedUserData = JSON.parse(localStorageData);
@@ -70,11 +79,11 @@ export class DashboardComponent implements OnInit {
     this.filteredUserData = this.workOutUserData;
     this.extractUniqueWorkoutTypes();
     this.calculateWorkoutData();
+    this.paginateUsers();
   }
 
   calculateWorkoutData() {
     this.workoutUsers = this.workOutUserData.length;
-
     const workoutTypesSet = new Set<string>();
     this.workOutUserData.forEach(user => {
       user.workouts.forEach(workout => {
@@ -91,16 +100,20 @@ export class DashboardComponent implements OnInit {
   }
 
   applyFilter(): void {
+    const searchTextLower = this.searchText.toLowerCase();
     this.filteredUserData = this.workOutUserData.filter(user => {
-      const matchesName = user.name.toLowerCase().includes(this.searchText.toLowerCase());
+      const userNameLower = user.name.toLowerCase();
+      const matchesName = userNameLower.includes(searchTextLower);
       const matchesType = this.selectedName === 'all' || user.workouts.some(workout => workout.type === this.selectedName);
       return matchesName && matchesType;
     });
-    this.extractUniqueWorkoutTypes()
+    this.extractUniqueWorkoutTypes();
+    this.currentPage = 1; 
+    this.paginateUsers();
   }
-
+  
   extractUniqueWorkoutTypes(): void {
-    this.uniqueWorkoutTypes=[];
+    this.uniqueWorkoutTypes = [];
     const seen = new Set<string>();
     this.filteredUserData.forEach(user => {
       user.workouts.forEach(workout => {
@@ -110,5 +123,47 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
+  }
+  
+  paginateUsers(): void {
+    const startIndex = (this.currentPage - 1) * this.usersPerPage;
+    const endIndex = startIndex + this.usersPerPage;
+    this.filteredUserDataForDisplay = this.filteredUserData.slice(startIndex, endIndex);
+  }
+  
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.paginateUsers();
+    }
+  }
+  
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.paginateUsers();
+    }
+  }
+  
+  setPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateUsers();
+    }
+  }
+  
+  onPerPageChange(event: any): void {
+    this.usersPerPage = event.target.value;
+    this.currentPage = 1; 
+    this.paginateUsers(); 
+  }
+  
+  get totalPages(): number {
+    return Math.ceil(this.filteredUserData.length / this.usersPerPage);
+  }
+
+  getReportUrl(user: any): string {
+    const userName = user.name.toLowerCase().replace(/\s+/g, '').split(',').join('');
+    return `/reports/${userName}`;
   }
 }

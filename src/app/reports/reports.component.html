@@ -1,1 +1,39 @@
-<p>reports works!</p>
+<div class="container mx-auto px-4 py-6 min-h-screen">
+    <div class="flex flex-wrap">
+        <div class="w-full">
+            <div class="w-full rounded overflow-hidden shadow-lg bg-white p-2 rounded-3xl">
+                <div class="px-6 py-4">
+                    <p class="font-bold text-xl text-gray-600"><i class="bi bi-person-circle"></i> Reports</p>
+                    <hr/>
+                    <div class="overflow-x-auto w-full">
+                        <table class="table-fixed shadow-lg min-w-full">
+                          <thead>
+                            <tr>
+                              <th class="w-1/4 truncate py-2 px-4 text-left">S. No.</th>
+                              <th class="w-2/4 truncate py-2 px-4 text-left">Username</th>
+                              <th class="w-1/4 truncate py-2 px-4 text-left">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr class="even:bg-white odd:bg-gray-200"  *ngFor="let user of getPaginatedUsers(); let i = index">
+                                <td class="py-2 px-4 "><p><b>{{i+1}}</b></p></td>
+                                <td class="py-2 px-4 "><p>{{user.name}}</p></td>
+                                <td class="py-2 px-4 ">
+                                    <a [href]="getReportUrl(user)" class="p-2 rounded-2xl text-sm rounded mt-3 mb-3 text-white bg-indigo-600 hover:bg-indigo-800">
+                                        See Reports
+                                    </a>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-center mt-4">
+                        <button (click)="prevPage()" [disabled]="currentPage === 1" class="mx-1 p-2 bg-gray-300 rounded hover:bg-gray-400">Previous</button>
+                        <button *ngFor="let page of [].constructor(totalPages); let i = index" (click)="setPage(i + 1)" [class.bg-indigo-600]="currentPage === i + 1" class="mx-1 p-2 bg-gray-300 rounded hover:bg-gray-400">{{ i + 1 }}</button>
+                        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="mx-1 p-2 bg-gray-300 rounded hover:bg-gray-400">Next</button>
+                    </div>                      
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

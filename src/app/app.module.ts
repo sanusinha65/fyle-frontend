@@ -7,20 +7,17 @@ import { HeaderComponent } from './header/header.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FormsModule } from '@angular/forms';
 import { WorkoutComponent } from './workout/workout.component';
-import { CreateWorkoutComponent } from './workout/create-workout/create-workout.component';
-import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UserReportComponent } from './reports/user-report/user-report.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     WorkoutComponent,
-    CreateWorkoutComponent,
-    UsersComponent,
     ReportsComponent,
     UserReportComponent,
     DashboardComponent,
@@ -29,7 +26,8 @@ import { FooterComponent } from './footer/footer.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ChartModule
   ],
   providers: [
     provideClientHydration(),
