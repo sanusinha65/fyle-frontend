@@ -1,3 +1,11 @@
+# Navigation 
+
+Health Challenge Tracker:-
+
+Dashboard:- Showing Total Users, Workout Min and Types. Also, showing table for all the users as well as link for their reports.
+Create Workout:- It contains navigation links for each users as well as the option to create workout.
+Reports:- We will be getting all the users for whom we can see the reports
+
 # FyleAssignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
