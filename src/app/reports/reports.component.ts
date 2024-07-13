@@ -21,7 +21,7 @@ export class ReportsComponent implements OnInit {
   workOutUserData: User[] = [];
   constructor(private titleService: Title) { }
   ngOnInit(): void {
-    this.titleService.setTitle('Workout | Fyle');
+    this.titleService.setTitle('Reports | Fyle');
     const localStorageData = localStorage.getItem('userData');
     if (localStorageData) {
       const storedUserData = JSON.parse(localStorageData);

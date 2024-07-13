@@ -19,7 +19,6 @@ interface User {
 })
 export class DashboardComponent implements OnInit {
   value: string = '';
-  title = 'fyle-assignment';
   workoutUsers = 0;
   workoutTime = 0;
   workoutTypes = 0;

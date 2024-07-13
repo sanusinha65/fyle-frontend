@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { FormsModule } from '@angular/forms';
 import { WorkoutComponent } from './workout/workout.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UserReportComponent } from './reports/user-report/user-report.component';
@@ -27,7 +28,8 @@ import { ChartModule } from 'primeng/chart';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ChartModule
+    ChartModule,
+    RouterModule
   ],
   providers: [
     provideClientHydration(),

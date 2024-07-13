@@ -1,16 +1,16 @@
 <div class="w-full bg-gray-200 min-h-screen">
     <div class="container mx-auto px-4 py-6">
         <div class="flex flex-wrap">
-            <div class="w-full md:w-1/3">
+            <div class="w-full md:w-1/3 mt-2 mb-2">
                 <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6 rounded-3xl">
-                    <div class="px-6">
+                    <div>
                         <div class="w-full">
                             <div class="flex flex-wrap items-center">
                                 <div class="w-2/3">
-                                    <p class="font-bold text-xl mb-2 text-gray-600 group-hover:text-white"><i class="bi-person-circle"></i> User Details</p>
+                                    <p class="font-bold text-sm mb-2 text-gray-600 group-hover:text-white"><i class="bi-person-circle"></i> User Details</p>
                                 </div>
-                                <div class="w-1/3 text-center">
-                                    <p ><a href="/reports" class="p-2 rounded-3xl bg-indigo-600 text-white hover:bg-indigo-700">Go Back</a></p>
+                                <div class="w-1/3 md:text-center">
+                                    <p><a href="/reports" class="p-2 rounded-3xl bg-indigo-600 text-xs text-white hover:bg-indigo-700">Go Back</a></p>
                                 </div>
                             </div>
                         </div>
@@ -36,9 +36,18 @@
                     </div>
                 </div>
             </div>
-            <div class="w-full md:w-2/3">
+            <div class="w-full md:pl-3 md:w-2/3 mt-2 mb-2">
                 <div class="max-w-full rounded overflow-hidden shadow-lg bg-white p-6 rounded-3xl">
                     <div class="px-6">
+                        <div class="w-full">
+                            <label for="chartType" class="font-bold ">Select Chart Type:</label>
+                            <select [ngModel]="chartType" class="mx-1 p-1 border rounded" (change)="changeChartType($event)">
+                                <option value="bar">Bar</option>
+                                <option value="doughnut">Doughnut</option>
+                                <option value="pie">Pie</option>
+                                <option value="polarArea">Polar Area</option>
+                            </select>
+                        </div>
                         <div class="chart-container bg-white">
                             <canvas id="MyChart">{{ data }}</canvas>
                         </div>
