@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title} from '@angular/platform-browser';
+import { LocalStorageService } from '../services/local-storage.service';
 
 interface Workout {
   type: string;
@@ -20,10 +21,10 @@ interface User {
 
 export class WorkoutComponent implements OnInit {
   workOutUserData: User[] = [];
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title, private localStorageService: LocalStorageService) { }
   ngOnInit(): void {
     this.titleService.setTitle('Workout | Fyle');
-    const localStorageData = localStorage.getItem('userData');
+    const localStorageData = this.localStorageService.getItem('userData');
     if (localStorageData) {
       const storedUserData = JSON.parse(localStorageData);
       this.workOutUserData.push(...storedUserData);
@@ -97,7 +98,7 @@ export class WorkoutComponent implements OnInit {
       };
       this.workOutUserData.push(newUser);
     }
-    localStorage.setItem('userData', JSON.stringify(this.workOutUserData));
+    this.localStorageService.setItem('userData', JSON.stringify(this.workOutUserData));
     this.resetForm();
   }
   // for resetting the form once it is added. 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { LocalStorageService } from '../services/local-storage.service';
 
 interface Workout {
   type: string;
@@ -59,20 +60,16 @@ export class DashboardComponent implements OnInit {
   usersPerPage: number = 5;
   perPageOptions: number[] = [5, 10, 25, 50, 100];
 
-  constructor(private titleService: Title) { }
+  constructor(private titleService: Title, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.titleService.setTitle('Dashboard | Fyle');
-    if (typeof localStorage === 'undefined') {
-      console.error('localStorage is not available.');
-      return;
-    }
-    const localStorageData = localStorage.getItem('userData');
+    const localStorageData = this.localStorageService.getItem('userData');
     if (localStorageData) {
       const storedUserData = JSON.parse(localStorageData);
       this.workOutUserData.push(...storedUserData);
     } else {
-      localStorage.setItem('userData', JSON.stringify(this.dummyData));
+      this.localStorageService.setItem('userData', JSON.stringify(this.dummyData));
       this.workOutUserData.push(...this.dummyData);
     }
     this.filteredUserData = this.workOutUserData;

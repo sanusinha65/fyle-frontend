@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title} from '@angular/platform-browser';
 import {Chart} from 'chart.js';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 
 interface ChartTypeRegistry {
   line: 'line';
   bar: 'bar';
-  radar: 'radar';
 }
 
 
@@ -37,11 +37,12 @@ export class UserReportComponent implements OnInit {
   data: any;
   username: string = '';
   userData: User | null = null;
+  name: string = '';
   chartData: any = null;
   options: ChartOptions = {};
   chartType: string ='bar';
 
-  constructor(private route: ActivatedRoute, private titleService: Title) { 
+  constructor(private route: ActivatedRoute, private titleService: Title, private localStorageService: LocalStorageService) { 
     this.data = {};
   }
 
@@ -54,11 +55,13 @@ export class UserReportComponent implements OnInit {
   }
 
   loadUserDataFromLocalStorage() {
-    const localStorageData = localStorage.getItem('userData');
+    const localStorageData = this.localStorageService.getItem('userData');
     if (localStorageData) {
       const parsedData: User[] = JSON.parse(localStorageData);
       this.userData = parsedData.find(user => user.name.toLowerCase().replace(/\s+/g, '').split(',').join('') === this.username) ?? null;
       if (this.userData) {
+        this.name= this.userData.name;
+        this.titleService.setTitle(this.name+"'s Report " + ' | Fyle');
         this.prepareChartData();
       } else {
         console.error(`User ${this.username} not found in localStorage data.`);

@@ -6,6 +6,14 @@ Dashboard:- Showing Total Users, Workout Min and Types. Also, showing table for 
 Create Workout:- It contains navigation links for each users as well as the option to create workout.
 Reports:- We will be getting all the users for whom we can see the reports
 
+# Test Cases
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+
+Some Test Cases were not passed, I am trying to resolve them. 
+
+
 # FyleAssignment
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.

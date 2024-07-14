@@ -13,6 +13,7 @@ import { UserReportComponent } from './reports/user-report/user-report.component
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
 import { ChartModule } from 'primeng/chart';
+import { LocalStorageService } from './services/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ChartModule } from 'primeng/chart';
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    LocalStorageService
   ],
   bootstrap: [AppComponent]
 })
