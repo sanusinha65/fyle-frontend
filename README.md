@@ -10,12 +10,14 @@ It contains navigation links for each users as well as the option to create work
 We will be getting all the users for whom we can see the reports
 
 # Test Cases
-![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
+![Service-Component](image-4.png)
+![App-Component](image-3.png)
+![Whole Assignment](image-5.png)
 
 100% Code Coverage For Service and App Component.<br> 
-80% For Other Components
+More Than 80% For Other Components
 
 # FyleAssignment
 
