@@ -2,17 +2,20 @@
 
 Health Challenge Tracker:-
 
-Dashboard:- Showing Total Users, Workout Min and Types. Also, showing table for all the users as well as link for their reports.
-Create Workout:- It contains navigation links for each users as well as the option to create workout.
-Reports:- We will be getting all the users for whom we can see the reports
+## Dashboard 
+Showing Total Users, Workout Min and Types. Also, showing table for all the users as well as link for their reports.
+## Create Workout
+It contains navigation links for each users as well as the option to create workout.
+## Reports 
+We will be getting all the users for whom we can see the reports
 
 # Test Cases
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
 
-Some Test Cases were not passed, I am trying to resolve them. 
-
+100% Code Coverage For Service and App Component.<br> 
+80% For Other Components
 
 # FyleAssignment
 
